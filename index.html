@@ -2,54 +2,50 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mi Diario Mental</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">Mi Diario Mental</title>
+  <link rel="stylesheet" href="static/css/style.css" />
 </head>
-<body class="bg-light">
-  <div class="d-flex justify-content-end p-3">
-  <select id="language-selector" class="form-select w-auto">
-    <option value="es">Español</option>
-    <option value="en">English</option>
-    <option value="gl">Galego</option>
-  </select>
-</div>
-
-
-  <header class="bg-primary text-white p-3 text-center">
-    <h1>🧠 Mi Diario Mental</h1>
-    <p>Registra cómo te sientes hoy</p>
+<body>
+  <header class="header">
+    <h1 data-i18n="headerTitle">🧠 Mi Diario Mental</h1>
+    <p data-i18n="headerDesc">Registra cómo te sientes hoy</p>
+    <div class="language-selector">
+      <label for="language-selector" data-i18n="language">Idioma:</label>
+      <select id="language-selector">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+        <option value="gl">Galego</option>
+      </select>
+    </div>
   </header>
 
-  <main class="container py-4">
-    <form action="/" method="POST">
-      <div class="mb-3">
-        <label for="fecha" class="form-label">Fecha</label>
-        <input type="date" id="fecha" name="fecha" class="form-control" required>
-      </div>
+  <main class="container">
+    <form id="journal-form">
+      <label for="fecha" data-i18n="labelDate">Fecha</label>
+      <input type="date" id="fecha" name="fecha" required />
 
-      <div class="mb-3">
-        <label for="emocion" class="form-label">¿Cómo te sientes?</label>
-        <select id="emocion" name="emocion" class="form-select" required>
-          <option value="">Selecciona</option>
-          <option value="Feliz">😊 Feliz</option>
-          <option value="Triste">😢 Triste</option>
-          <option value="Ansioso/a">😰 Ansioso/a</option>
-          <option value="Irritado/a">😠 Irritado/a</option>
-          <option value="Motivado/a">💪 Motivado/a</option>
-          <option value="Cansado/a">😴 Cansado/a</option>
-        </select>
-      </div>
+      <label for="emocion" data-i18n="labelEmotion">¿Cómo te sientes?</label>
+      <select id="emocion" name="emocion" required>
+        <option value="feliz" data-i18n="happy">Feliz</option>
+        <option value="triste" data-i18n="sad">Triste</option>
+        <option value="ansiosa" data-i18n="anxious">Ansiosa</option>
+        <option value="enfadada" data-i18n="angry">Enfadada</option>
+        <option value="neutral" data-i18n="neutral">Neutral</option>
+      </select>
 
-      <div class="mb-3">
-        <label for="texto" class="form-label">Escribe lo que sientes</label>
-        <textarea id="texto" name="texto" rows="5" class="form-control" placeholder="Hoy me he sentido..."></textarea>
-      </div>
+      <label for="entrada" data-i18n="labelText">Escribe lo que sientes</label>
+      <textarea id="entrada" name="entrada" rows="5" required></textarea>
 
-      <button type="submit" class="btn btn-primary">Guardar entrada</button>
+      <button type="submit" data-i18n="buttonSubmit">Guardar entrada</button>
     </form>
   </main>
 
+  <footer>
+    <p>© 2025 Elena Guardia</p>
+  </footer>
+
+  <script src="static/js/i18n.js"></script>
 </body>
 </html>
+
