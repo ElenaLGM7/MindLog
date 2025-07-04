@@ -1,0 +1,15 @@
+{
+  "title": "Mi Diario Mental",
+  "headerTitle": "🧠 Mi Diario Mental",
+  "headerDesc": "Registra cómo te sientes hoy",
+  "language": "Idioma:",
+  "labelDate": "Fecha",
+  "labelEmotion": "¿Cómo te sientes?",
+  "happy": "Feliz",
+  "sad": "Triste",
+  "anxious": "Ansiosa",
+  "angry": "Enfadada",
+  "neutral": "Neutral",
+  "labelText": "Escribe lo que sientes",
+  "buttonSubmit": "Guardar entrada"
+}
