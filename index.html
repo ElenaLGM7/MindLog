@@ -1,51 +1,79 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="title">Mi Diario Mental</title>
-  <link rel="stylesheet" href="static/css/style.css" />
+  <title>MindLog · Diario emocional</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="favicon.ico" />
 </head>
 <body>
-  <header class="header">
-    <h1 data-i18n="headerTitle">🧠 Mi Diario Mental</h1>
-    <p data-i18n="headerDesc">Registra cómo te sientes hoy</p>
-    <div class="language-selector">
-      <label for="language-selector" data-i18n="language">Idioma:</label>
-      <select id="language-selector">
+  <header>
+    <h1 id="app-title"></h1>
+    <nav>
+      <button data-section="home" class="active"></button>
+      <button data-section="new-entry"></button>
+      <button data-section="history"></button>
+      <button data-section="stats"></button>
+      <button data-section="assistant"></button>
+      <button data-section="settings"></button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="section active">
+      <h2></h2>
+      <p></p>
+    </section>
+
+    <section id="new-entry" class="section">
+      <h2></h2>
+      <form id="entry-form">
+        <input type="text" id="entry-title" placeholder="" required />
+        <textarea id="entry-text" placeholder="" required></textarea>
+        <select id="entry-mood" required>
+          <option value="happy">😊</option>
+          <option value="neutral">😐</option>
+          <option value="sad">😢</option>
+        </select>
+        <button type="submit"></button>
+      </form>
+    </section>
+
+    <section id="history" class="section">
+      <h2></h2>
+      <div id="entries-list"></div>
+    </section>
+
+    <section id="stats" class="section">
+      <h2></h2>
+      <canvas id="stats-chart"></canvas>
+    </section>
+
+    <section id="assistant" class="section">
+      <h2></h2>
+      <p></p>
+      <textarea id="assistant-input" placeholder=""></textarea>
+      <button id="assistant-submit"></button>
+      <div id="assistant-response"></div>
+    </section>
+
+    <section id="settings" class="section">
+      <h2></h2>
+      <label for="language-select"></label>
+      <select id="language-select">
         <option value="es">Español</option>
         <option value="en">English</option>
         <option value="gl">Galego</option>
       </select>
-    </div>
-  </header>
-
-  <main class="container">
-    <form id="journal-form">
-      <label for="fecha" data-i18n="labelDate">Fecha</label>
-      <input type="date" id="fecha" name="fecha" required />
-
-      <label for="emocion" data-i18n="labelEmotion">¿Cómo te sientes?</label>
-      <select id="emocion" name="emocion" required>
-        <option value="feliz" data-i18n="happy">Feliz</option>
-        <option value="triste" data-i18n="sad">Triste</option>
-        <option value="ansiosa" data-i18n="anxious">Ansiosa</option>
-        <option value="enfadada" data-i18n="angry">Enfadada</option>
-        <option value="neutral" data-i18n="neutral">Neutral</option>
-      </select>
-
-      <label for="entrada" data-i18n="labelText">Escribe lo que sientes</label>
-      <textarea id="entrada" name="entrada" rows="5" required></textarea>
-
-      <button type="submit" data-i18n="buttonSubmit">Guardar entrada</button>
-    </form>
+    </section>
   </main>
 
   <footer>
-    <p>© 2025 Elena Guardia</p>
+    <p>MindLog © 2025 · Elena Guardia</p>
   </footer>
 
-  <script src="static/js/i18n.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
-
