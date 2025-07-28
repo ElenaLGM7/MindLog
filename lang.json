@@ -1,0 +1,77 @@
+{
+  "es": {
+    "title": "MindLog · Diario emocional",
+    "sections": {
+      "home": "Inicio",
+      "new-entry": "Nuevo registro",
+      "history": "Historial",
+      "stats": "Estadísticas",
+      "assistant": "Asistente IA",
+      "settings": "Configuración"
+    },
+    "welcome": "Bienvenida a tu espacio emocional seguro.",
+    "placeholders": {
+      "title": "Título del registro",
+      "text": "Escribe lo que sientes...",
+      "assistant": "¿Sobre qué necesitas ayuda?"
+    },
+    "buttons": {
+      "save": "Guardar entrada",
+      "ask": "Preguntar"
+    },
+    "language": "Idioma",
+    "alerts": {
+      "saved": "Entrada guardada localmente."
+    }
+  },
+  "en": {
+    "title": "MindLog · Emotional Journal",
+    "sections": {
+      "home": "Home",
+      "new-entry": "New Entry",
+      "history": "History",
+      "stats": "Statistics",
+      "assistant": "AI Assistant",
+      "settings": "Settings"
+    },
+    "welcome": "Welcome to your safe emotional space.",
+    "placeholders": {
+      "title": "Entry title",
+      "text": "Write how you feel...",
+      "assistant": "What do you need help with?"
+    },
+    "buttons": {
+      "save": "Save entry",
+      "ask": "Ask"
+    },
+    "language": "Language",
+    "alerts": {
+      "saved": "Entry saved locally."
+    }
+  },
+  "gl": {
+    "title": "MindLog · Diario emocional",
+    "sections": {
+      "home": "Inicio",
+      "new-entry": "Novo rexistro",
+      "history": "Historial",
+      "stats": "Estatísticas",
+      "assistant": "Asistente IA",
+      "settings": "Configuración"
+    },
+    "welcome": "Benvida ao teu espazo emocional seguro.",
+    "placeholders": {
+      "title": "Título do rexistro",
+      "text": "Escribe como te sentes...",
+      "assistant": "Sobre que precisas axuda?"
+    },
+    "buttons": {
+      "save": "Gardar rexistro",
+      "ask": "Preguntar"
+    },
+    "language": "Idioma",
+    "alerts": {
+      "saved": "Rexistro gardado localmente."
+    }
+  }
+}
