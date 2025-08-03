@@ -1,82 +1,50 @@
 let currentLang = localStorage.getItem("lang") || "es";
-let langData = {};
-const emotions = ["😊", "😢", "😡", "😨", "😍", "😐", "🥲", "😎", "🤯"];
+let translations = {};
 
-async function loadLang() {
+async function loadLang(lang) {
   const res = await fetch("lang.json");
-  langData = await res.json();
-  applyLang();
+  translations = await res.json();
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+  applyTranslations();
 }
 
-function applyLang() {
-  document.getElementById("app-title").textContent = langData[currentLang].title;
-  document.querySelectorAll("[data-translate]").forEach(el => {
-    el.textContent = langData[currentLang][el.dataset.translate];
+function applyTranslations() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (translations[currentLang] && translations[currentLang][key]) {
+      el.textContent = translations[currentLang][key];
+    }
   });
-  document.getElementById("entry-text").placeholder = langData[currentLang].entry_placeholder;
-  document.getElementById("ai-question").placeholder = langData[currentLang].ai_placeholder;
-  renderEmotions();
+
+  const question = document.getElementById("user-question");
+  question.placeholder = translations[currentLang]["assistant_placeholder"];
 }
 
-function renderEmotions() {
-  const container = document.getElementById("emotions-container");
-  container.innerHTML = "";
-  emotions.forEach(emoji => {
-    const label = document.createElement("label");
-    label.innerHTML = `<input type="checkbox" name="emotions" value="${emoji}"/> ${emoji}`;
-    container.appendChild(label);
+document.querySelectorAll("#language-switcher button").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    loadLang(btn.dataset.lang);
   });
-}
-
-function changeSection(sectionId) {
-  document.querySelectorAll("main section").forEach(s => s.classList.remove("active"));
-  document.getElementById(sectionId).classList.add("active");
-}
-
-document.querySelectorAll("nav button").forEach(btn => {
-  btn.addEventListener("click", () => changeSection(btn.dataset.section));
 });
 
-document.getElementById("language-select").addEventListener("change", e => {
-  currentLang = e.target.value;
-  localStorage.setItem("lang", currentLang);
-  applyLang();
-});
+document.getElementById("ask-button").addEventListener("click", async () => {
+  const question = document.getElementById("user-question").value.trim();
+  const responseBox = document.getElementById("ai-response");
+  responseBox.textContent = translations[currentLang]["loading_response"];
 
-document.getElementById("entry-form").addEventListener("submit", e => {
-  e.preventDefault();
-  const text = document.getElementById("entry-text").value;
-  const selected = Array.from(document.querySelectorAll('input[name="emotions"]:checked'))
-    .map(e => e.value);
-  const entry = { text, emotions: selected, date: new Date().toISOString() };
-  const history = JSON.parse(localStorage.getItem("mindlog") || "[]");
-  history.unshift(entry);
-  localStorage.setItem("mindlog", JSON.stringify(history));
-  e.target.reset();
-  renderHistory();
-  changeSection("history");
-});
+  const res = await fetch("/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: question, lang: currentLang }),
+  });
 
-function renderHistory() {
-  const list = document.getElementById("history-list");
-  const entries = JSON.parse(localStorage.getItem("mindlog") || "[]");
-  list.innerHTML = entries.map(e => `<li>${e.date.split("T")[0]} - ${e.emotions.join(" ")}<br>${e.text}</li>`).join("");
-}
-
-document.getElementById("clear-data").addEventListener("click", () => {
-  if (confirm(langData[currentLang].confirm_clear)) {
-    localStorage.removeItem("mindlog");
-    renderHistory();
+  if (res.ok) {
+    const data = await res.json();
+    responseBox.textContent = data.reply;
+  } else {
+    responseBox.textContent = translations[currentLang]["error_response"];
   }
 });
 
-document.getElementById("ask-ai").addEventListener("click", () => {
-  const input = document.getElementById("ai-question").value.trim();
-  const output = document.getElementById("ai-response");
-  if (input) {
-    output.textContent = "🤖 " + langData[currentLang].ai_dummy;
-  }
-});
-
-loadLang();
-renderHistory();
+// Inicializa traducciones
+loadLang(currentLang);
