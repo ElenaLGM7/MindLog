@@ -1,15 +1,1 @@
-{
-  "title": "My Mental Journal",
-  "headerTitle": "🧠 My Mental Journal",
-  "headerDesc": "Track how you're feeling today",
-  "language": "Language:",
-  "labelDate": "Date",
-  "labelEmotion": "How are you feeling?",
-  "happy": "Happy",
-  "sad": "Sad",
-  "anxious": "Anxious",
-  "angry": "Angry",
-  "neutral": "Neutral",
-  "labelText": "Write what you feel",
-  "buttonSubmit": "Save entry"
-}
+
