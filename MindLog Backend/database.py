@@ -1,14 +1,29 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
 import os
+import psycopg2
+from psycopg2.extras import RealDictCursor
 from dotenv import load_dotenv
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DB_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+conn = psycopg2.connect(DB_URL, cursor_factory=RealDictCursor)
+cursor = conn.cursor()
 
-Base = declarative_base()
+def create_tables():
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS entries (
+            id SERIAL PRIMARY KEY,
+            text TEXT NOT NULL,
+            emotions TEXT[],
+            date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    """)
+    conn.commit()
+
+def save_entry(text: str, emotions: list[str], date: str):
+    cursor.execute(
+        "INSERT INTO entries (text, emotions, date) VALUES (%s, %s, %s);",
+        (text, emotions, date)
+    )
+    conn.commit()
