@@ -1,3 +1,12 @@
+print("🟢 Starting MindLog backend...")
+
+from fastapi import FastAPI
+# resto de imports...
+
+app = FastAPI()
+
+print("🟢 FastAPI app created successfully")
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
