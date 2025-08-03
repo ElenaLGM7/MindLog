@@ -1,75 +1,82 @@
 let currentLang = localStorage.getItem("lang") || "es";
 let langData = {};
+const emotions = ["😊", "😢", "😡", "😨", "😍", "😐", "🥲", "😎", "🤯"];
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadLanguage(currentLang);
-  document.getElementById("language-select").value = currentLang;
-  setupNavigation();
-  setupForm();
-  setupLanguageSwitch();
-});
-
-async function loadLanguage(lang) {
+async function loadLang() {
   const res = await fetch("lang.json");
   langData = await res.json();
-  currentLang = lang;
-  localStorage.setItem("lang", lang);
-  applyLanguage();
+  applyLang();
 }
 
-function applyLanguage() {
-  const t = langData[currentLang];
-
-  document.getElementById("app-title").textContent = t.title;
-
-  const sections = ["home", "new-entry", "history", "stats", "assistant", "settings"];
-  sections.forEach((id, i) => {
-    document.querySelector(`nav button[data-section="${id}"]`).textContent = t.sections[id];
-    document.querySelector(`#${id} h2`).textContent = t.sections[id];
+function applyLang() {
+  document.getElementById("app-title").textContent = langData[currentLang].title;
+  document.querySelectorAll("[data-translate]").forEach(el => {
+    el.textContent = langData[currentLang][el.dataset.translate];
   });
-
-  document.querySelector("#home p").textContent = t.welcome;
-  document.querySelector("#entry-title").placeholder = t.placeholders.title;
-  document.querySelector("#entry-text").placeholder = t.placeholders.text;
-  document.querySelector("#entry-form button").textContent = t.buttons.save;
-
-  document.querySelector("#assistant-input").placeholder = t.placeholders.assistant;
-  document.querySelector("#assistant-submit").textContent = t.buttons.ask;
-  document.querySelector("#settings label").textContent = t.language;
+  document.getElementById("entry-text").placeholder = langData[currentLang].entry_placeholder;
+  document.getElementById("ai-question").placeholder = langData[currentLang].ai_placeholder;
+  renderEmotions();
 }
 
-function setupNavigation() {
-  const buttons = document.querySelectorAll("nav button");
-  const sections = document.querySelectorAll(".section");
-
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      sections.forEach(sec => sec.classList.remove("active"));
-      document.getElementById(btn.dataset.section).classList.add("active");
-    });
+function renderEmotions() {
+  const container = document.getElementById("emotions-container");
+  container.innerHTML = "";
+  emotions.forEach(emoji => {
+    const label = document.createElement("label");
+    label.innerHTML = `<input type="checkbox" name="emotions" value="${emoji}"/> ${emoji}`;
+    container.appendChild(label);
   });
 }
 
-function setupForm() {
-  const form = document.getElementById("entry-form");
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    alert(langData[currentLang].alerts.saved);
-    form.reset();
-  });
-
-  document.getElementById("assistant-submit").addEventListener("click", () => {
-    const input = document.getElementById("assistant-input").value;
-    document.getElementById("assistant-response").textContent =
-      input ? `"${input}" 🤖 (respuesta simulada)` : "";
-  });
+function changeSection(sectionId) {
+  document.querySelectorAll("main section").forEach(s => s.classList.remove("active"));
+  document.getElementById(sectionId).classList.add("active");
 }
 
-function setupLanguageSwitch() {
-  document.getElementById("language-select").addEventListener("change", e => {
-    loadLanguage(e.target.value);
-  });
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click", () => changeSection(btn.dataset.section));
+});
+
+document.getElementById("language-select").addEventListener("change", e => {
+  currentLang = e.target.value;
+  localStorage.setItem("lang", currentLang);
+  applyLang();
+});
+
+document.getElementById("entry-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const text = document.getElementById("entry-text").value;
+  const selected = Array.from(document.querySelectorAll('input[name="emotions"]:checked'))
+    .map(e => e.value);
+  const entry = { text, emotions: selected, date: new Date().toISOString() };
+  const history = JSON.parse(localStorage.getItem("mindlog") || "[]");
+  history.unshift(entry);
+  localStorage.setItem("mindlog", JSON.stringify(history));
+  e.target.reset();
+  renderHistory();
+  changeSection("history");
+});
+
+function renderHistory() {
+  const list = document.getElementById("history-list");
+  const entries = JSON.parse(localStorage.getItem("mindlog") || "[]");
+  list.innerHTML = entries.map(e => `<li>${e.date.split("T")[0]} - ${e.emotions.join(" ")}<br>${e.text}</li>`).join("");
 }
+
+document.getElementById("clear-data").addEventListener("click", () => {
+  if (confirm(langData[currentLang].confirm_clear)) {
+    localStorage.removeItem("mindlog");
+    renderHistory();
+  }
+});
+
+document.getElementById("ask-ai").addEventListener("click", () => {
+  const input = document.getElementById("ai-question").value.trim();
+  const output = document.getElementById("ai-response");
+  if (input) {
+    output.textContent = "🤖 " + langData[currentLang].ai_dummy;
+  }
+});
+
+loadLang();
+renderHistory();
