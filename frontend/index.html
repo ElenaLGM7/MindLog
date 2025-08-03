@@ -3,68 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="MindLog - Tu diario emocional inteligente">
   <title>MindLog</title>
   <link rel="stylesheet" href="styles.css" />
-  <link rel="manifest" href="manifest.json" />
 </head>
 <body>
   <header>
-    <h1 id="app-title"></h1>
-    <select id="language-select">
-      <option value="es">🇪🇸</option>
-      <option value="en">🇬🇧</option>
-      <option value="gl">🇬🇹</option>
-    </select>
+    <h1>MindLog</h1>
+    <div id="language-switcher">
+      <button data-lang="es">ES</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="gl">GL</button>
+    </div>
   </header>
 
-  <nav>
-    <button data-section="home"></button>
-    <button data-section="new"></button>
-    <button data-section="history"></button>
-    <button data-section="stats"></button>
-    <button data-section="ai"></button>
-    <button data-section="settings"></button>
-  </nav>
-
   <main>
-    <section id="home" class="active">
-      <h2 data-translate="welcome"></h2>
-      <p data-translate="intro"></p>
-    </section>
-
-    <section id="new">
-      <h2 data-translate="new_entry"></h2>
-      <form id="entry-form">
-        <textarea id="entry-text" placeholder="" required></textarea>
-        <div id="emotions-container"></div>
-        <button type="submit" data-translate="save_entry"></button>
-      </form>
-    </section>
-
-    <section id="history">
-      <h2 data-translate="history"></h2>
-      <ul id="history-list"></ul>
-    </section>
-
-    <section id="stats">
-      <h2 data-translate="statistics"></h2>
-      <div id="stats-output"></div>
-    </section>
-
-    <section id="ai">
-      <h2 data-translate="ai_assistant"></h2>
-      <p data-translate="ai_description"></p>
-      <textarea id="ai-question" placeholder=""></textarea>
-      <button id="ask-ai" data-translate="ask_ai"></button>
-      <div id="ai-response"></div>
-    </section>
-
-    <section id="settings">
-      <h2 data-translate="settings"></h2>
-      <button id="clear-data" data-translate="clear_data"></button>
+    <!-- Asistente IA -->
+    <section id="ai-assistant">
+      <h2 data-i18n="assistant_title">Asistente emocional</h2>
+      <p data-i18n="assistant_description">Hazle una pregunta sobre cómo te sientes</p>
+      <textarea id="user-question" placeholder="¿Cómo te sientes hoy?"></textarea>
+      <button id="ask-button" data-i18n="ask_button">Preguntar</button>
+      <div id="ai-response" class="response-box"></div>
     </section>
   </main>
+
+  <footer>
+    <p>MindLog © 2025</p>
+  </footer>
 
   <script src="main.js"></script>
 </body>
