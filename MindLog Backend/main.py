@@ -1,43 +1,40 @@
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
-from utils import generate_ai_response
-import os
+from fastapi.staticfiles import StaticFiles
 from dotenv import load_dotenv
+import os
+
+from ai import generate_response
+from database import create_tables, save_entry
+from utils import get_current_datetime
+from pydantic import BaseModel
 
 load_dotenv()
 
 app = FastAPI()
 
-# CORS para permitir peticiones desde el frontend
+# Middleware CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Puedes restringir a ["https://mindproject.netlify.app"]
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
-# Modelo de datos esperado
-class AIRequest(BaseModel):
-    message: str
-    style: str = "psychologist"  # Valores: psychologist, coach, friend
-    language: str = "es"         # Valores: es, en, gl
+# Montar frontend si lo deseas desde el backend
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-@app.post("/ai-assistant")
-async def ai_assistant(request: AIRequest):
-    try:
-        reply = await generate_ai_response(
-            message=request.message,
-            style=request.style,
-            language=request.language
-        )
-        return {"reply": reply}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# Crear tablas si no existen
+create_tables()
 
-@app.get("/")
-async def root():
-    return {"message": "MindLog backend funcionando"}
+class EntryRequest(BaseModel):
+    text: str
+    emotions: list[str] = []
+    date: str | None = None
 
+@app.post("/generate")
+async def chat(entry: EntryRequest):
+    response = generate_response(entry.text)
+    timestamp = get_current_datetime()
+    save_entry(entry.text, entry.emotions, timestamp)
+    return {"response": response, "timestamp": timestamp}
