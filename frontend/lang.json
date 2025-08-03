@@ -2,6 +2,10 @@
   "es": {
     "assistant_title": "Asistente emocional",
     "assistant_description": "Hazle una pregunta sobre cómo te sientes",
+    "choose_mode": "Elige un estilo de respuesta:",
+    "mode_psychologist": "🧠 Psicólogo",
+    "mode_coach": "💬 Coach emocional",
+    "mode_friend": "🤝 Amigo empático",
     "ask_button": "Preguntar",
     "assistant_placeholder": "¿Cómo te sientes hoy?",
     "loading_response": "Pensando...",
@@ -10,6 +14,10 @@
   "en": {
     "assistant_title": "Emotional Assistant",
     "assistant_description": "Ask a question about how you're feeling",
+    "choose_mode": "Choose a response style:",
+    "mode_psychologist": "🧠 Psychologist",
+    "mode_coach": "💬 Emotional coach",
+    "mode_friend": "🤝 Supportive friend",
     "ask_button": "Ask",
     "assistant_placeholder": "How are you feeling today?",
     "loading_response": "Thinking...",
@@ -18,6 +26,10 @@
   "gl": {
     "assistant_title": "Asistente emocional",
     "assistant_description": "Fai unha pregunta sobre como te sentes",
+    "choose_mode": "Escolle un estilo de resposta:",
+    "mode_psychologist": "🧠 Psicólogo",
+    "mode_coach": "💬 Adestrador emocional",
+    "mode_friend": "🤝 Amigo empático",
     "ask_button": "Preguntar",
     "assistant_placeholder": "Como te sentes hoxe?",
     "loading_response": "Pensando...",
