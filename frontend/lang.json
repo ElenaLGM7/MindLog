@@ -1,77 +1,56 @@
 {
   "es": {
-    "title": "MindLog · Diario emocional",
-    "sections": {
-      "home": "Inicio",
-      "new-entry": "Nuevo registro",
-      "history": "Historial",
-      "stats": "Estadísticas",
-      "assistant": "Asistente IA",
-      "settings": "Configuración"
-    },
-    "welcome": "Bienvenida a tu espacio emocional seguro.",
-    "placeholders": {
-      "title": "Título del registro",
-      "text": "Escribe lo que sientes...",
-      "assistant": "¿Sobre qué necesitas ayuda?"
-    },
-    "buttons": {
-      "save": "Guardar entrada",
-      "ask": "Preguntar"
-    },
-    "language": "Idioma",
-    "alerts": {
-      "saved": "Entrada guardada localmente."
-    }
+    "title": "MindLog",
+    "welcome": "Bienvenid@ a tu diario emocional",
+    "intro": "Registra cómo te sientes, reflexiona y deja que la IA te acompañe.",
+    "new_entry": "Nuevo registro",
+    "save_entry": "Guardar entrada",
+    "entry_placeholder": "¿Cómo te sientes hoy?",
+    "history": "Historial",
+    "statistics": "Estadísticas",
+    "ai_assistant": "Asistente IA",
+    "ai_description": "Escribe una pregunta emocional o una reflexión. Próximamente con IA real.",
+    "ai_placeholder": "Escribe tu pregunta o reflexión...",
+    "ask_ai": "Preguntar a la IA",
+    "ai_dummy": "Gracias por tu mensaje. Pronto responderé con una reflexión útil.",
+    "settings": "Configuración",
+    "clear_data": "Borrar datos",
+    "confirm_clear": "¿Estás segura de que quieres borrar todos tus registros?"
   },
   "en": {
-    "title": "MindLog · Emotional Journal",
-    "sections": {
-      "home": "Home",
-      "new-entry": "New Entry",
-      "history": "History",
-      "stats": "Statistics",
-      "assistant": "AI Assistant",
-      "settings": "Settings"
-    },
-    "welcome": "Welcome to your safe emotional space.",
-    "placeholders": {
-      "title": "Entry title",
-      "text": "Write how you feel...",
-      "assistant": "What do you need help with?"
-    },
-    "buttons": {
-      "save": "Save entry",
-      "ask": "Ask"
-    },
-    "language": "Language",
-    "alerts": {
-      "saved": "Entry saved locally."
-    }
+    "title": "MindLog",
+    "welcome": "Welcome to your emotional diary",
+    "intro": "Track your feelings, reflect, and let AI support you.",
+    "new_entry": "New Entry",
+    "save_entry": "Save Entry",
+    "entry_placeholder": "How do you feel today?",
+    "history": "History",
+    "statistics": "Statistics",
+    "ai_assistant": "AI Assistant",
+    "ai_description": "Write an emotional question or reflection. Real AI coming soon.",
+    "ai_placeholder": "Write your question or thought...",
+    "ask_ai": "Ask AI",
+    "ai_dummy": "Thanks for your message. I'll soon respond with helpful insights.",
+    "settings": "Settings",
+    "clear_data": "Clear Data",
+    "confirm_clear": "Are you sure you want to delete all entries?"
   },
   "gl": {
-    "title": "MindLog · Diario emocional",
-    "sections": {
-      "home": "Inicio",
-      "new-entry": "Novo rexistro",
-      "history": "Historial",
-      "stats": "Estatísticas",
-      "assistant": "Asistente IA",
-      "settings": "Configuración"
-    },
-    "welcome": "Benvida ao teu espazo emocional seguro.",
-    "placeholders": {
-      "title": "Título do rexistro",
-      "text": "Escribe como te sentes...",
-      "assistant": "Sobre que precisas axuda?"
-    },
-    "buttons": {
-      "save": "Gardar rexistro",
-      "ask": "Preguntar"
-    },
-    "language": "Idioma",
-    "alerts": {
-      "saved": "Rexistro gardado localmente."
-    }
+    "title": "MindLog",
+    "welcome": "Benvido/a ao teu diario emocional",
+    "intro": "Rexistra como te sentes, reflexiona e deixa que a IA te acompañe.",
+    "new_entry": "Novo rexistro",
+    "save_entry": "Gardar entrada",
+    "entry_placeholder": "Como te sentes hoxe?",
+    "history": "Historial",
+    "statistics": "Estatísticas",
+    "ai_assistant": "Asistente IA",
+    "ai_description": "Escribe unha pregunta emocional ou reflexión. IA real proximamente.",
+    "ai_placeholder": "Escribe a túa pregunta ou pensamento...",
+    "ask_ai": "Preguntar á IA",
+    "ai_dummy": "Grazas pola túa mensaxe. Pronto responderei cunha reflexión útil.",
+    "settings": "Configuración",
+    "clear_data": "Borrar datos",
+    "confirm_clear": "Seguro que queres borrar todos os rexistros?"
   }
 }
