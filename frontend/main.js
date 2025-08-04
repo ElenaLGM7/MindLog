@@ -1,17 +1,43 @@
-document.getElementById("send-btn").addEventListener("click", async () => {
-    const input = document.getElementById("user-input").value;
+import { loadLang, setLang } from './modules/lang.js';
+import { renderLogin, renderRegister, renderJournal, renderHistory } from './modules/views.js';
 
-    const response = await fetch("http://localhost:8000/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input })
-    });
+const app = document.getElementById('app');
+let lang = localStorage.getItem('lang') || 'es';
+let token = localStorage.getItem('token') || null;
 
-    const data = await response.json();
+export async function render(route = 'login') {
+  const translations = await loadLang(lang);
+  app.innerHTML = '';
 
-    if (data.response) {
-        document.getElementById("ai-response").innerText = data.response;
-    } else {
-        document.getElementById("ai-response").innerText = "Hubo un error.";
-    }
+  switch (route) {
+    case 'login':
+      renderLogin(app, translations);
+      break;
+    case 'register':
+      renderRegister(app, translations);
+      break;
+    case 'journal':
+      renderJournal(app, translations);
+      break;
+    case 'history':
+      renderHistory(app, translations);
+      break;
+    default:
+      app.innerHTML = '<p>Ruta no válida</p>';
+  }
+}
+
+window.addEventListener('load', () => {
+  render(token ? 'journal' : 'login');
 });
+
+export function changeLang(newLang) {
+  lang = newLang;
+  localStorage.setItem('lang', lang);
+  render(token ? 'journal' : 'login');
+}
+
+export function setToken(newToken) {
+  token = newToken;
+  localStorage.setItem('token', newToken);
+}
