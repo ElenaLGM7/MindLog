@@ -1,11 +1,18 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime
-from database import Base
+from pydantic import BaseModel, Field
+from typing import Optional, List
 from datetime import datetime
 
-class Entry(Base):
-    __tablename__ = "entries"
+# Modelo de entrada para crear un registro de estado emocional
+class EmotionEntryCreate(BaseModel):
+    user_id: str
+    emotions: List[str] = Field(..., min_items=1)
+    note: Optional[str] = None
+    created_at: Optional[datetime] = None
 
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    content = Column(Text)
-    created_at = Column(DateTime, default=datetime.utcnow)
+# Modelo que representa un registro completo con ID
+class EmotionEntry(EmotionEntryCreate):
+    id: int
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
