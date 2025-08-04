@@ -1,43 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MindLog</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MindLog - Diario Emocional</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>MindLog</h1>
-    <div id="language-switcher">
-      <button data-lang="es">ES</button>
-      <button data-lang="en">EN</button>
-      <button data-lang="gl">GL</button>
-    </div>
-  </header>
-
-  <main>
-    <section id="ai-assistant">
-      <h2 data-i18n="assistant_title">Asistente emocional</h2>
-      <p data-i18n="assistant_description">Hazle una pregunta sobre cómo te sientes</p>
-
-      <label for="ai-mode" data-i18n="choose_mode">Elige un estilo de respuesta:</label>
-      <select id="ai-mode">
-        <option value="psychologist" data-i18n="mode_psychologist">🧠 Psicólogo</option>
-        <option value="coach" data-i18n="mode_coach">💬 Coach emocional</option>
-        <option value="friend" data-i18n="mode_friend">🤝 Amigo empático</option>
-      </select>
-
-      <textarea id="user-question" placeholder="¿Cómo te sientes hoy?"></textarea>
-      <button id="ask-button" data-i18n="ask_button">Preguntar</button>
-      <div id="ai-response" class="response-box"></div>
-    </section>
-  </main>
-
-  <footer>
-    <p>MindLog © 2025</p>
-  </footer>
-
-  <script src="main.js"></script>
+  <div id="app"></div>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
