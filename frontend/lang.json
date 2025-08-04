@@ -1,38 +1,38 @@
 {
   "es": {
-    "assistant_title": "Asistente emocional",
-    "assistant_description": "Hazle una pregunta sobre cómo te sientes",
-    "choose_mode": "Elige un estilo de respuesta:",
-    "mode_psychologist": "🧠 Psicólogo",
-    "mode_coach": "💬 Coach emocional",
-    "mode_friend": "🤝 Amigo empático",
-    "ask_button": "Preguntar",
-    "assistant_placeholder": "¿Cómo te sientes hoy?",
-    "loading_response": "Pensando...",
-    "error_response": "Lo siento, ha ocurrido un error."
+    "title": "MindLog - Tu diario emocional",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión",
+    "new_entry": "Nueva entrada",
+    "history": "Historial",
+    "ai_assist": "Asistente IA",
+    "submit": "Enviar",
+    "emotion_placeholder": "¿Cómo te sientes hoy?",
+    "response_label": "Respuesta de la IA"
   },
   "en": {
-    "assistant_title": "Emotional Assistant",
-    "assistant_description": "Ask a question about how you're feeling",
-    "choose_mode": "Choose a response style:",
-    "mode_psychologist": "🧠 Psychologist",
-    "mode_coach": "💬 Emotional coach",
-    "mode_friend": "🤝 Supportive friend",
-    "ask_button": "Ask",
-    "assistant_placeholder": "How are you feeling today?",
-    "loading_response": "Thinking...",
-    "error_response": "Sorry, something went wrong."
+    "title": "MindLog - Your emotional journal",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "new_entry": "New Entry",
+    "history": "History",
+    "ai_assist": "AI Assistant",
+    "submit": "Submit",
+    "emotion_placeholder": "How are you feeling today?",
+    "response_label": "AI Response"
   },
   "gl": {
-    "assistant_title": "Asistente emocional",
-    "assistant_description": "Fai unha pregunta sobre como te sentes",
-    "choose_mode": "Escolle un estilo de resposta:",
-    "mode_psychologist": "🧠 Psicólogo",
-    "mode_coach": "💬 Adestrador emocional",
-    "mode_friend": "🤝 Amigo empático",
-    "ask_button": "Preguntar",
-    "assistant_placeholder": "Como te sentes hoxe?",
-    "loading_response": "Pensando...",
-    "error_response": "Sentímolo, ocorreu un erro."
+    "title": "MindLog - O teu diario emocional",
+    "login": "Iniciar sesión",
+    "register": "Rexistrarse",
+    "logout": "Pechar sesión",
+    "new_entry": "Nova entrada",
+    "history": "Historial",
+    "ai_assist": "Asistente IA",
+    "submit": "Enviar",
+    "emotion_placeholder": "Como te sentes hoxe?",
+    "response_label": "Resposta da IA"
   }
 }
