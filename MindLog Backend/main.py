@@ -1,49 +1,47 @@
-print("🟢 Starting MindLog backend...")
-
-from fastapi import FastAPI
-# resto de imports...
-
-app = FastAPI()
-
-print("🟢 FastAPI app created successfully")
-
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from dotenv import load_dotenv
-import os
+from fastapi.middleware.cors import CORSMiddleware
+import openai
 
-from ai import generate_response
-from database import create_tables, save_entry
-from utils import get_current_datetime
-from pydantic import BaseModel
-
-load_dotenv()
+# Configuración temporal (sin .env)
+openai.api_key = "TU_API_KEY_AQUI"  # ponla aquí directamente por ahora
 
 app = FastAPI()
 
-# Middleware CORS
+# CORS para conectar con Netlify/local
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
-# Montar frontend si lo deseas desde el backend
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Servir frontend estático
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
 
-# Crear tablas si no existen
-create_tables()
+@app.get("/")
+async def serve_index():
+    return FileResponse("frontend/index.html")
 
-class EntryRequest(BaseModel):
-    text: str
-    emotions: list[str] = []
-    date: str | None = None
+# Endpoint de IA
+@app.post("/api/chat")
+async def chat(request: Request):
+    data = await request.json()
+    user_message = data.get("message", "")
 
-@app.post("/generate")
-async def chat(entry: EntryRequest):
-    response = generate_response(entry.text)
-    timestamp = get_current_datetime()
-    save_entry(entry.text, entry.emotions, timestamp)
-    return {"response": response, "timestamp": timestamp}
+    if not user_message:
+        return JSONResponse({"error": "No message received"}, status_code=400)
+
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",  # o "gpt-4"
+            messages=[
+                {"role": "system", "content": "Eres un asistente emocional y empático que ayuda a reflexionar."},
+                {"role": "user", "content": user_message}
+            ]
+        )
+        ai_reply = response.choices[0].message["content"]
+        return {"response": ai_reply.strip()}
+    except Exception as e:
+        return JSONResponse({"error": str(e)}, status_code=500)
